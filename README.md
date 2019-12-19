@@ -12,4 +12,9 @@
 ## 제작 과정
 
 0. 유니티 프로젝트 만들기  
-    2D 애셋을 사용할 것이므로, 2D로 만들었습니다.
+    2D 애셋을 사용할 것이므로, 2D로 만들었습니다.  
+
+1. 애셋 추가하기  
+    상단의 Window - Asset Store를 눌러 유니티 애셋 스토어를 엽니다.  
+    2D Roguelike를 검색해 UNITY TECHNOLOGIES의 2D Roguelike를 다운로드 및 임포트합니다.  
+    인터넷에서 배경으로 쓸 적당한 이미지도 찾아 넣습니다. (\Assets\Sprites\\)  
