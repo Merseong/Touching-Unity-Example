@@ -35,3 +35,14 @@
     플레이어에서 Add Component를 눌러 Box Collider 2D와 Rigidbody 2D를 넣습니다.  
     Rigidbody2D에서 Gravity Scale을 0으로 바꿉니다.  
     (선택) 그림 주변에 다른 콜라이더 오브젝트들을 배치하고, Box Collider 2D의 Size를 조정하며 벽을 만들 수 있습니다. 이때, 플레이어의 Rigidbody 2D-Constraints-Freeze Rotation을 체크합니다.  
+
+4. 총알 쏘기  
+    씬에 Sprite를 만들고, Transform 리셋 후 Sprite에 아무거나 넣습니다.  
+    Prefabs폴더를 만들고, 씬의 스프라이트를 드래그드롭으로 옮깁니다. (이걸로 Prefab을 만들수 있습니다.)  
+    프리팹을 수정하면 프리팹에서 찍어내는 오브젝트들도 같게 만들 수 있습니다.  
+    총알 프리팹에 Rigidbody2D와 BoxCollider2D를 넣고, BoxCollider에서 Is Trigger를 켜고, Rigidbody에서 Gravity Scale을 0으로 바꿉니다.
+    Bullet스크립트를 만들어 프리팹에 넣습니다. (스크립트 주석 참고)  
+    PlayerController스크립트를 수정합니다. (스크립트 주석 참고)  
+    씬의 플레이어 오브젝트의 PlayerController-BulletPrefab에 총알 프리팹을 끌어다 놓습니다.  
+    플레이해서 Game탭에서 클릭하면 그 방향으로 총알이 나갑니다. (엄청 많이)  
+    (선택) PlayerController스크립트에서 총알 발사에 딜레이를 줄 수 있습니다. (스크립트 주석 참고)
