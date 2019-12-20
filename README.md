@@ -75,3 +75,8 @@
     3. 캐릭터 애니메이션 (PlayerController:16~22, 53)
     4. 마우스 커서 (GameManager:27~28, 41~42)
     5. 파티클 (GameManager:29~30, MyEnemy:40~41, 54~55)
+
+9. 빌드하기  
+    유니티 상단의 File-Build Setting을 엽니다.  
+    빌드할 씬, 플랫폼(보통 맨위의 Standalone)을 선택하고 Build And Run을 누릅니다.  
+    자유롭게 플레이합니다!  
