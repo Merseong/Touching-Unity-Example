@@ -35,17 +35,16 @@ public class MyEnemy : MonoBehaviour
             // 2마리를 생성합니다. 싱글톤이기때문에, inst로 씬 내의 인스턴스를 호출할 수 있습니다.
             EnemyGenerator.inst.GenerateEnemy(2);
 
+            // 점수를 1점 올립니다.
+            if (!GameManager.inst.isGameOver) GameManager.inst.score++;
+
             // 총알에 맞은 적도 사라집니다.
             Destroy(gameObject);
         }
         else if (collision.GetComponent<PlayerController>() is PlayerController p) // 플레이어일 경우 (플레이어 스크립트를 가지고있을경우)
         {
-            // 시각적으로 보이지 않게하고, 컨트롤 스크립트를 끕니다.
-            p.GetComponent<SpriteRenderer>().enabled = false;
-            p.GetComponent<PlayerController>().enabled = false;
-
-            // Log에 게임이 종료되었다고 표시합니다.
-            Debug.LogError("Game Over!");
+            // GameManager의 GameOver함수를 호출합니다.
+            GameManager.inst.GameOver(p);
         }
     }
 }
