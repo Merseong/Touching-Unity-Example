@@ -32,6 +32,9 @@ public class MyEnemy : MonoBehaviour
             // 총알이 사라집니다.
             Destroy(b.gameObject);
 
+            // 2마리를 생성합니다. 싱글톤이기때문에, inst로 씬 내의 인스턴스를 호출할 수 있습니다.
+            EnemyGenerator.inst.GenerateEnemy(2);
+
             // 총알에 맞은 적도 사라집니다.
             Destroy(gameObject);
         }
