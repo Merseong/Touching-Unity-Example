@@ -20,11 +20,38 @@ public class GameManager : MonoBehaviour
     public int score = 0;
     // 게임오버 Text 오브젝트입니다.
     public GameObject gameOverText;
+    // 하이스코어 표시입니다.
+    public GameObject highScoreText;
+    // 최고득점의 기록입니다.
+    public int highScore = 0;
+    // 커서의 Texture
+    public Texture2D cursorTex;
+    // 공용 파티클
+    public GameObject redParticle;
+
+    private void Start()
+    {
+        // 로컬에 하이스코어가 저장되어있는지 확인하고, 없으면 0으로 초기화합니다.
+        if (!PlayerPrefs.HasKey("HighScore"))
+        {
+            PlayerPrefs.SetInt("HighScore", 0);
+        }
+        highScore = PlayerPrefs.GetInt("HighScore");
+
+        // 커서를 바꿉니다
+        Cursor.SetCursor(cursorTex, new Vector2(15, 15), CursorMode.Auto);
+    }
 
     // 게임오버시 할 동작들입니다.
     public void GameOver(PlayerController p)
     {
         isGameOver = true;
+        // 게임오버시 하이스코어면 기록합니다.
+        if (score > highScore)
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+            highScoreText.SetActive(true);
+        }
         // 게임오버 텍스트를 켭니다.
         gameOverText.SetActive(true);
 

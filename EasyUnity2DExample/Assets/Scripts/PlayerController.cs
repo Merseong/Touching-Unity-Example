@@ -13,6 +13,13 @@ public class PlayerController : MonoBehaviour
 
     // 바로 직전에 쏜 총알의 시간
     private float lastBulletTime = 0;
+    // 캐릭터의 애니메이터
+    private Animator anim;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     // 매 프레임마다 호출됩니다.
     private void Update()
@@ -20,6 +27,13 @@ public class PlayerController : MonoBehaviour
         // WASD 또는 화살표 인풋을 받습니다. 상단바 Edit-Project Settings-Input에서 확인할 수 있습니다.
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
+
+        // 마우스 방향과 화면 중심에서  쏠 방향을 결정합니다.
+        Vector3 mouseDir = Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2);
+
+        // 만일 마우스가 왼쪽이면 왼쪽을 보게 만든다.
+        if (mouseDir.x < 0) transform.localScale = new Vector3(-1, 1, 1);
+        else if (mouseDir.x > 0) transform.localScale = Vector3.one;
 
         // 이 게임오브젝트의 transform의 Translate 함수를 호출합니다.
         // Translate는 현재위치에서 매개변수만큼 이동하는 함수입니다.
@@ -32,12 +46,11 @@ public class PlayerController : MonoBehaviour
         {
             lastBulletTime = Time.time;
 
-            // 마우스 방향과 화면 중심에서  쏠 방향을 결정합니다.
-            Vector3 dir = Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2);
-
             // 프리팹의 인스턴스를 만들고, Rigidbody를 호출해 힘을 가합니다.
             GameObject bulletInst = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            bulletInst.GetComponent<Rigidbody2D>().AddForce(dir);
+            bulletInst.GetComponent<Rigidbody2D>().AddForce(mouseDir);
+
+            anim.SetTrigger("playerChop");
         }
     }
 }

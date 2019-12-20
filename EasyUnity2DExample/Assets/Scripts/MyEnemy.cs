@@ -20,8 +20,14 @@ public class MyEnemy : MonoBehaviour
         // 만일 플레이어 오브젝트가 있다면
         if (player != null)
         {
+            Vector3 dir = (player.position - transform.position).normalized;
+
             // 플레이어 방향으로 갑니다.
-            transform.Translate((player.position - transform.position).normalized * speed);
+            transform.Translate(dir * speed);
+
+            // 플레이어 방향을 바라봅니다.
+            if (dir.x < 0) transform.localScale = Vector3.one;
+            else if (dir.x > 0) transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 
@@ -31,6 +37,8 @@ public class MyEnemy : MonoBehaviour
         {
             // 총알이 사라집니다.
             Destroy(b.gameObject);
+            // 파티클을 생성합니다.
+            Instantiate(GameManager.inst.redParticle, transform.position + new Vector3(0, 0, -1), Quaternion.identity);
 
             // 2마리를 생성합니다. 싱글톤이기때문에, inst로 씬 내의 인스턴스를 호출할 수 있습니다.
             EnemyGenerator.inst.GenerateEnemy(2);
@@ -43,6 +51,8 @@ public class MyEnemy : MonoBehaviour
         }
         else if (collision.GetComponent<PlayerController>() is PlayerController p) // 플레이어일 경우 (플레이어 스크립트를 가지고있을경우)
         {
+            // 파티클을 생성합니다.
+            Instantiate(GameManager.inst.redParticle, transform.position + new Vector3(0, 0, -1), Quaternion.identity);
             // GameManager의 GameOver함수를 호출합니다.
             GameManager.inst.GameOver(p);
         }
